@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{USER_NAME}}-dev-file-config
+data:
+  config.json: |
+    {
+      "database.url": "jdbc:mysql://localhost:3306/develop-db",
+      "database.user": "developer",
+      "database.password": "developer"
+    }
+

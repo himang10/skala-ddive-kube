@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skala-myfirst-api-server
+  namespace: class-0
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: skala-myfirst-api-server
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8081'
+        prometheus.io/path: '/actuator/prometheus'
+        update: 09b4f249
+      labels:
+        app: skala-myfirst-api-server
+    spec:
+      serviceAccountName: default
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - skala-myfirst-api-server
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: webserver
+        image: skala-registry.skala-ai.com/skala-webserver:1.0
+        imagePullPolicy: Always
+        env:
+        - name: USER_NAME
+          value: skala
+        - name: NAMESPACE
+          value: class-0

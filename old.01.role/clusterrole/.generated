@@ -1,0 +1,5 @@
+skala-cluster-read-role.yaml
+skala-cluster-read-rolebinding.yaml
+skala-full-cluster-role.yaml
+skala-full-cluster-rolebinding.yaml
+skala-read-rolebinding.yaml

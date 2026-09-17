@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: skala-job
+  namespace: class-0
+  labels:                 
+    app: skala-job
+spec:
+  backoffLimit: 3
+  completions: 3
+  parallelism: 2
+  template:
+    spec:
+      containers:
+      - name: print-time
+        image: busybox
+        command:
+          - sh
+          - -c
+          - 'echo "Current Time: $(date +%Y-%m-%d_%H:%M:%S)"'
+      restartPolicy: Never

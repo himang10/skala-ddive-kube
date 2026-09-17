@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{USER_NAME}}-{{SERVICE_NAME}}-lb
+  namespace: {{NAMESPACE}}
+  annotations:
+    # NLB(Network Load Balancer) 타입으로 생성 지시 (AWS Load Balancer Controller 사용)
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    # 인터넷에서 접근 가능한 공개 LB로 배치 (public subnet)
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    # VPC 내부 전용 Internal LB 비활성화 → 외부 공개 LB
+    service.beta.kubernetes.io/aws-load-balancer-internal: "false"
+spec:
+  type: LoadBalancer
+  selector:
+    app: {{USER_NAME}}-{{SERVICE_NAME}}
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+    - name: mgmt
+      protocol: TCP
+      port: 8081
+      targetPort: 8081

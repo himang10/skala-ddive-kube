@@ -1,0 +1,38 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: skala-scaledobject
+  namespace: class-0
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: skala-myfirst-api-server
+  pollingInterval: 5              
+  cooldownPeriod: 10              
+  minReplicaCount: 1
+  maxReplicaCount: 10
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleUp:
+          stabilizationWindowSeconds: 0
+          policies:
+          - type: Percent
+            value: 100
+            periodSeconds: 5
+        scaleDown:
+          stabilizationWindowSeconds: 0
+          policies:
+          - type: Percent
+            value: 100
+            periodSeconds: 5
+  triggers:
+  - type: kubernetes-workload
+    metadata:
+      workloadType: Deployment
+      namespace: class-0
+      podSelector: "app=skala-collabo-shared"
+      value: "1.0"
+      metricType: Value
+      podConditionType: Ready     
+

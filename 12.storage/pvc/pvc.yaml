@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-skala-myfirst-api-server
+  namespace: class-0
+spec:
+  storageClassName: ""
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 100Mi
+  volumeName: efs-skala-myfirst-api-server
+

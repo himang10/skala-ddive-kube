@@ -1,0 +1,6 @@
+nodeport-service.yaml
+service.yaml
+lb-service.yaml
+externalName.yaml
+endpoints.yaml
+deploy.yaml

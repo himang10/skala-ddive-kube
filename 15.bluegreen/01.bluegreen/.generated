@@ -1,0 +1,5 @@
+blue-ingress.yaml
+change-green-service.yaml
+service.yaml
+ingress.yaml
+green-ingress.yaml

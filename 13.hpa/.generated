@@ -1,0 +1,6 @@
+apirequest-so.yaml
+hpa-memory.yaml
+collabo-shared.yaml
+workload-so.yaml
+hpa.yaml
+hpa-cpu.yaml

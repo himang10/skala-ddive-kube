@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: container-limit
+  namespace: {{NAMESPACE}}
+spec:
+  limits:
+    - type: Container
+      min:
+        cpu: 50m
+        memory: 64Mi
+      max:
+        cpu: 200m
+        memory: 256Mi
+      default:
+        cpu: 200m
+        memory: 256Mi
+      defaultRequest:
+        cpu: 100m
+        memory: 128Mi
+    - type: Pod
+      min:
+        cpu: 50m
+        memory: 64Mi
+      max:
+        cpu: 400m
+        memory: 512Mi

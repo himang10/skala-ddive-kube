@@ -1,0 +1,14 @@
+# ClusterRoleBinding: skala-full-cluster-rolebinding
+# skala-full-cluster-role을 ServiceAccount에 바인딩
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: skala-full-cluster-rolebinding
+subjects:
+- kind: ServiceAccount
+  name: class-0-skala-sa
+  namespace: class-0
+roleRef:
+  kind: ClusterRole
+  name: skala-full-cluster-role
+  apiGroup: rbac.authorization.k8s.io

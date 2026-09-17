@@ -1,0 +1,44 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: keda-operator
+    app.kubernetes.io/name: keda-hpa-sk199-api-so
+    app.kubernetes.io/part-of: sk199-api-so
+    app.kubernetes.io/version: 2.16.1
+    scaledobject.keda.sh/name: sk199-api-so
+  name: keda-hpa-sk199-api-so
+  namespace: class-cloud
+spec:
+  behavior:
+    scaleDown:
+      policies:
+      - periodSeconds: 5
+        type: Percent
+        value: 100
+      selectPolicy: Max
+      stabilizationWindowSeconds: 0
+    scaleUp:
+      policies:
+      - periodSeconds: 5
+        type: Percent
+        value: 100
+      selectPolicy: Max
+      stabilizationWindowSeconds: 0
+  maxReplicas: 5
+  metrics:
+  - external:
+      metric:
+        name: s0-prometheus
+        selector:
+          matchLabels:
+            scaledobject.keda.sh/name: sk199-api-so
+      target:
+        averageValue: "30"
+        type: AverageValue
+    type: External
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sk199-myfirst-api-server

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: namespace-quota
+  namespace: {{NAMESPACE}}
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory: 8Gi
+    limits.cpu: "6"
+    limits.memory: 12Gi
+
+    pods: "20"
+    services: "10"
+    configmaps: "30"
+
+    persistentvolumeclaims: "10"
+    requests.storage: "100Gi"

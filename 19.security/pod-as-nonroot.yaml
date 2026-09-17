@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: skala-pod-as-nonroot
+  namespace: class-0
+spec:
+  containers:
+    - name: main
+      image: alpine
+      command: ["/bin/sleep", "infinity"]
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000

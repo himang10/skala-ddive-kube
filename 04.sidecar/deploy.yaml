@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skala-myfirst-api-server
+  namespace: class-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: skala-myfirst-api-server
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8080'
+        prometheus.io/path: '/prometheus'
+        update: 09b4f249
+      labels:
+        app: skala-myfirst-api-server
+    spec:
+      serviceAccountName: class-0-skala-sa
+      containers:
+      - name: webserver
+        image: skala-registry.skala-ai.com/skala-webserver:2.0.0-NEW
+        imagePullPolicy: Always
+        command:
+        - /bin/sh
+        - -c
+        args:
+        - exec python3 $EXEC_PYTHON_CODE --port $SERVER_PORT
+        env:
+        - name: EXEC_PYTHON_CODE
+          value: fastserver.py
+        - name: SERVER_PORT
+          value: "8080"
+        - name: USER_NAME
+          value: skala
+      - name: kubectl
+        image: bitnami/kubectl:latest
+        command: ["/bin/sh", "-c", "sleep infinity"]
+        env:
+        - name: NAMESPACE
+          value: class-0
