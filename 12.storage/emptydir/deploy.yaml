@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       annotations:
-        update: 09b4f249
+        update: f9952e34
       labels:
         app: skala-myfirst-api-server
     spec:

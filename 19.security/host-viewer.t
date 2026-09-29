@@ -19,10 +19,11 @@ spec:
         - |
           apt-get update && \
           apt-get install -y procps && \
-          sleep infinity
+          exec tail -f /dev/null
       volumeMounts:
         - name: host-root
           mountPath: /host
+          readOnly: true
   volumes:
     - name: host-root
       hostPath:

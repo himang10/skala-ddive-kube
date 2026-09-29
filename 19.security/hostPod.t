@@ -10,4 +10,4 @@ spec:
   containers:
   - name: main
     image: alpine
-    command: ["/bin/sleep", "infinity"]
+    command: ["/bin/sh", "-c", "exec tail -f /dev/null"]

@@ -19,7 +19,7 @@ spec:
         - |
           apt-get update && \
           apt-get install -y procps && \
-          sleep infinity
+          exec sleep infinity
       volumeMounts:
         - name: host-root
           mountPath: /host

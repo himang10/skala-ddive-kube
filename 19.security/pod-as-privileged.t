@@ -13,6 +13,6 @@ spec:
         - -c
         - |
           apk add iptables
-          sleep infinity
+          exec tail -f /dev/null
       securityContext:
         privileged: true

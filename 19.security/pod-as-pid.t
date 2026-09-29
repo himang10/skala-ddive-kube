@@ -14,4 +14,4 @@ spec:
         - -c
         - |
           apk add procps
-          sleep infinity
+          exec tail -f /dev/null
