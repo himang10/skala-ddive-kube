@@ -1,0 +1,315 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "skala-webserver",
+    "namespace": "class-0",
+    "uid": "bfa8afe2-9396-49f0-a690-6abcf768a823",
+    "resourceVersion": "23864017",
+    "generation": 2,
+    "creationTimestamp": "2026-09-25T08:00:59Z",
+    "deletionTimestamp": "2026-09-25T08:01:48Z",
+    "deletionGracePeriodSeconds": 30,
+    "labels": {
+      "app": "skala-webserver",
+      "topology.kubernetes.io/region": "ap-northeast-2",
+      "topology.kubernetes.io/zone": "ap-northeast-2b"
+    },
+    "managedFields": [
+      {
+        "manager": "curl",
+        "operation": "Update",
+        "apiVersion": "v1",
+        "time": "2026-09-25T08:00:59Z",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:labels": {
+              ".": {},
+              "f:app": {}
+            }
+          },
+          "f:spec": {
+            "f:containers": {
+              "k:{\"name\":\"webserver\"}": {
+                ".": {},
+                "f:env": {
+                  ".": {},
+                  "k:{\"name\":\"CLASS_NAME\"}": {
+                    ".": {},
+                    "f:name": {},
+                    "f:value": {}
+                  },
+                  "k:{\"name\":\"USER_NAME\"}": {
+                    ".": {},
+                    "f:name": {},
+                    "f:value": {}
+                  }
+                },
+                "f:image": {},
+                "f:imagePullPolicy": {},
+                "f:name": {},
+                "f:resources": {},
+                "f:terminationMessagePath": {},
+                "f:terminationMessagePolicy": {}
+              }
+            },
+            "f:dnsPolicy": {},
+            "f:enableServiceLinks": {},
+            "f:restartPolicy": {},
+            "f:schedulerName": {},
+            "f:securityContext": {},
+            "f:terminationGracePeriodSeconds": {}
+          }
+        }
+      },
+      {
+        "manager": "kubelet",
+        "operation": "Update",
+        "apiVersion": "v1",
+        "time": "2026-09-25T08:01:00Z",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:status": {
+            "f:conditions": {
+              "k:{\"type\":\"ContainersReady\"}": {
+                ".": {},
+                "f:lastProbeTime": {},
+                "f:lastTransitionTime": {},
+                "f:observedGeneration": {},
+                "f:status": {},
+                "f:type": {}
+              },
+              "k:{\"type\":\"Initialized\"}": {
+                ".": {},
+                "f:lastProbeTime": {},
+                "f:lastTransitionTime": {},
+                "f:observedGeneration": {},
+                "f:status": {},
+                "f:type": {}
+              },
+              "k:{\"type\":\"PodReadyToStartContainers\"}": {
+                ".": {},
+                "f:lastProbeTime": {},
+                "f:lastTransitionTime": {},
+                "f:observedGeneration": {},
+                "f:status": {},
+                "f:type": {}
+              },
+              "k:{\"type\":\"PodScheduled\"}": {
+                "f:observedGeneration": {}
+              },
+              "k:{\"type\":\"Ready\"}": {
+                ".": {},
+                "f:lastProbeTime": {},
+                "f:lastTransitionTime": {},
+                "f:observedGeneration": {},
+                "f:status": {},
+                "f:type": {}
+              }
+            },
+            "f:containerStatuses": {},
+            "f:hostIP": {},
+            "f:hostIPs": {},
+            "f:observedGeneration": {},
+            "f:phase": {},
+            "f:podIP": {},
+            "f:podIPs": {
+              ".": {},
+              "k:{\"ip\":\"172.31.19.20\"}": {
+                ".": {},
+                "f:ip": {}
+              }
+            },
+            "f:startTime": {}
+          }
+        },
+        "subresource": "status"
+      }
+    ]
+  },
+  "spec": {
+    "volumes": [
+      {
+        "name": "kube-api-access-9gssg",
+        "projected": {
+          "sources": [
+            {
+              "serviceAccountToken": {
+                "expirationSeconds": 3607,
+                "path": "token"
+              }
+            },
+            {
+              "configMap": {
+                "name": "kube-root-ca.crt",
+                "items": [
+                  {
+                    "key": "ca.crt",
+                    "path": "ca.crt"
+                  }
+                ]
+              }
+            },
+            {
+              "downwardAPI": {
+                "items": [
+                  {
+                    "path": "namespace",
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "metadata.namespace"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "defaultMode": 420
+        }
+      }
+    ],
+    "containers": [
+      {
+        "name": "webserver",
+        "image": "skala-registry.skala-ai.com/class-0/skala-webserver:1.0",
+        "env": [
+          {
+            "name": "USER_NAME",
+            "value": "skala"
+          },
+          {
+            "name": "CLASS_NAME",
+            "value": "class-0"
+          }
+        ],
+        "resources": {},
+        "volumeMounts": [
+          {
+            "name": "kube-api-access-9gssg",
+            "readOnly": true,
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+          }
+        ],
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "imagePullPolicy": "Always"
+      }
+    ],
+    "restartPolicy": "Always",
+    "terminationGracePeriodSeconds": 30,
+    "dnsPolicy": "ClusterFirst",
+    "serviceAccountName": "default",
+    "serviceAccount": "default",
+    "nodeName": "ip-172-31-25-55.ap-northeast-2.compute.internal",
+    "securityContext": {},
+    "schedulerName": "default-scheduler",
+    "tolerations": [
+      {
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      },
+      {
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      }
+    ],
+    "priority": 0,
+    "enableServiceLinks": true,
+    "preemptionPolicy": "PreemptLowerPriority"
+  },
+  "status": {
+    "observedGeneration": 1,
+    "phase": "Running",
+    "conditions": [
+      {
+        "type": "PodReadyToStartContainers",
+        "observedGeneration": 1,
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-09-25T08:01:00Z"
+      },
+      {
+        "type": "Initialized",
+        "observedGeneration": 1,
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-09-25T08:00:59Z"
+      },
+      {
+        "type": "Ready",
+        "observedGeneration": 1,
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-09-25T08:01:00Z"
+      },
+      {
+        "type": "ContainersReady",
+        "observedGeneration": 1,
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-09-25T08:01:00Z"
+      },
+      {
+        "type": "PodScheduled",
+        "observedGeneration": 1,
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-09-25T08:00:59Z"
+      }
+    ],
+    "hostIP": "172.31.25.55",
+    "hostIPs": [
+      {
+        "ip": "172.31.25.55"
+      }
+    ],
+    "podIP": "172.31.19.20",
+    "podIPs": [
+      {
+        "ip": "172.31.19.20"
+      }
+    ],
+    "startTime": "2026-09-25T08:00:59Z",
+    "containerStatuses": [
+      {
+        "name": "webserver",
+        "state": {
+          "running": {
+            "startedAt": "2026-09-25T08:01:00Z"
+          }
+        },
+        "lastState": {},
+        "ready": true,
+        "restartCount": 0,
+        "image": "skala-registry.skala-ai.com/class-0/skala-webserver:1.0",
+        "imageID": "skala-registry.skala-ai.com/class-0/skala-webserver@sha256:f3eaced799d0c9f12075789bcc3dee46355ad6731ae66414af0714b60d6ac25e",
+        "containerID": "containerd://bee46e6e60c8f60e27ca77c46a5c255f04a5a634bb2927129e7aab993691edce",
+        "started": true,
+        "resources": {},
+        "volumeMounts": [
+          {
+            "name": "kube-api-access-9gssg",
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          }
+        ],
+        "user": {
+          "linux": {
+            "uid": 0,
+            "gid": 0,
+            "supplementalGroups": [
+              0
+            ]
+          }
+        }
+      }
+    ],
+    "qosClass": "BestEffort"
+  }
+}
