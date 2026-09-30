@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: skala-cluster-nonresourceurls-role
+rules:
+# nonResourceURLs 접근 허용
+- nonResourceURLs:
+  - "/version"
+  - "/metrics"
+  - "/healthz"
+  - "/api"
+  - "/api/*"
+  - "/apis"
+  - "/apis/*"
+  verbs: ["get","list"]
