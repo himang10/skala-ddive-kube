@@ -5,7 +5,7 @@ metadata:
   namespace: class-0
 spec:
   hostNetwork: true
-  hostPID: true
+  terminationGracePeriodSeconds: 0
   containers:
     - name: main
       image: alpine

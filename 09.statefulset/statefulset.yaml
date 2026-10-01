@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: skala-myfirst-api-server
+  namespace: class-0
+spec:
+  replicas: 1
+  serviceName: skala-myfirst-api-server-headless
+  selector:
+    matchLabels:
+      app: skala-myfirst-api-server
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8080'
+        prometheus.io/path: '/actuator/prometheus'
+        update: 7828008e
+      labels:
+        app: skala-myfirst-api-server
+    spec:
+      containers:
+      - name: webserver
+        image: skala-registry.skala-us.com/class-0/skala-webserver:2.0
+        imagePullPolicy: Always
+        env:
+        - name: USER_NAME
+          value: skala
+        - name: NAMESPACE
+          value: class-0
+        volumeMounts:
+        - name: data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteMany"]
+      storageClassName: efs-sc-shared
+      resources:
+        requests:
+          storage: 100Mi

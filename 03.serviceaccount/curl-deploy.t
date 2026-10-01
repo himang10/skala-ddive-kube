@@ -20,5 +20,7 @@ spec:
       containers:
       - name: curl
         image: curlimages/curl:latest
+        securityContext:
+          runAsUser: 0
         command: ["sh", "-c"]
-        args: ["exec sleep infinity"]
+        args: ["apk add --no-cache jq && exec sleep infinity"]

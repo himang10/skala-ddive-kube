@@ -3,7 +3,7 @@ kind: Pod
 
 metadata:
   name: skala-pod-as-pid
-  namespace: class-1
+  namespace: class-0
 
 spec:
   hostPID: true

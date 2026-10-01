@@ -5,7 +5,7 @@ NAMESPACE=${CLASS_NAME}
 SERVICEACCOUNT_NAME=${CLASS_NAME}-${STUDENT_NUM}-sa
 SECRET_NAME=${SERVICEACCOUNT_NAME}-token
 
-OUTPUT_FILE="${CLASS_NAME}.${NAMESPACE}.kubeconfig"
+OUTPUT_FILE="${CLASS_NAME}.${STUDENT_NUM}.kubeconfig"
 
 TOKEN=$(kubectl get secret "$SECRET_NAME" -n "$NAMESPACE" -o jsonpath='{.data.token}' | base64 -d)
 CA=$(kubectl get secret "$SECRET_NAME" -n "$NAMESPACE" -o jsonpath='{.data.ca\.crt}')
