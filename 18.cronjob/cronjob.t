@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{USER_NAME}}-cronjob
+  namespace: {{NAMESPACE}}
+  labels:                 
+    app: {{USER_NAME}}-cronjob
+spec:
+  schedule: "*/3 * * * *"          # 매 3분마다 실행
+  timeZone: "Asia/Seoul"           # KST 기준 스케줄
+  concurrencyPolicy: Forbid        # 이전 Job 실행 중이면 새 Job 스킵
+  successfulJobsHistoryLimit: 2    # 성공한 Job 보관 개수
+  failedJobsHistoryLimit: 1        # 실패한 Job 보관 개수
+  startingDeadlineSeconds: 30      # 스케줄 놓쳤을 때 허용 대기시간(초)
+  jobTemplate:
+    spec:
+      backoffLimit: 3
+      completions: 2
+      parallelism: 1
+      template:
+        spec:
+          containers:
+          - name: print-time
+            image: busybox
+            command:
+              - sh
+              - -c
+              - 'echo "Current Time: $(date +%Y-%m-%d_%H:%M:%S)"'
+          restartPolicy: Never

@@ -1,0 +1,2 @@
+Hello, OpenSSL!
+이 파일은 대칭키(AES-256-CBC)로 암호화됩니다.
