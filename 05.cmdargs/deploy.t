@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: {{IMAGE_NAME}}
-        image: {{DOCKER_REGISTRY}}/{{USER_NAME}}-{{IMAGE_NAME}}:2.0
+        image: {{DOCKER_REGISTRY}}/{{NAMESPACE}}/{{USER_NAME}}-{{IMAGE_NAME}}:2.0
         imagePullPolicy: Always
         command:
         - /bin/sh
