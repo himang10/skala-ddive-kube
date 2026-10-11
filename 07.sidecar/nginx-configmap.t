@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{USER_NAME}}-nginx-sidecar-config
-  namespace: class-0
+  namespace: {{NAMESPACE}}
 data:
   default.conf: |
     server {

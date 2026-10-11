@@ -30,7 +30,7 @@ spec:
       mountPath: /root
   containers:
   - name: {{SERVICE_NAME}}
-    image: {{DOCKER_REGISTRY}}/{{USER_NAME}}-{{IMAGE_NAME}}:{{VERSION}}
+    image: {{DOCKER_REGISTRY}}/{{PROJECT_NAME}}/{{USER_NAME}}-{{IMAGE_NAME}}:{{VERSION}}
     imagePullPolicy: Always
     readinessProbe:
       exec:

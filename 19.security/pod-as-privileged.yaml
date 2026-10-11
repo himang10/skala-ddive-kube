@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: skala-security-context
+  namespace: class-0
+spec:
+  hostNetwork: true
+  terminationGracePeriodSeconds: 0
+  containers:
+    - name: main
+      image: alpine
+      command:
+        - /bin/sh
+        - -c
+        - |
+          apk add iptables
+          exec tail -f /dev/null
+      securityContext:
+        privileged: true

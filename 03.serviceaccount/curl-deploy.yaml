@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skala-curl
+  namespace: class-0
+  labels:
+    app: skala-curl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: skala-curl
+  template:
+    metadata:
+      labels:
+        app: skala-curl
+    spec:
+      #serviceAccountName: skala-admin-sa
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: curl
+        image: curlimages/curl:latest
+        securityContext:
+          runAsUser: 0
+        command: ["sh", "-c"]
+        args: ["apk add --no-cache jq && exec sleep infinity"]

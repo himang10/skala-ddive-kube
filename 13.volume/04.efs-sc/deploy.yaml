@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skala-volume-test
+  namespace: class-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: skala-volume-test
+  template:
+    metadata:
+      annotations:
+        update: "5d702c48"
+      labels:
+        app: skala-volume-test
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: test
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c"]
+        args:
+          - echo "Hello from busybox" > /data/hello.txt && sleep infinity
+        volumeMounts:
+        - name: efs-volume
+          mountPath: /data
+      volumes:
+      - name: efs-volume
+        persistentVolumeClaim:
+          claimName: skala-efs-pvc
+
